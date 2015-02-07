@@ -52,20 +52,15 @@ function canvasInit(c,data){
 	ctx.fillRect(0,0,c.width,c.height);
 }
 
-$( document ).ready(function(){
-	var c = document.getElementById("main");
-	var data = {objArray:[],canvasWidth:0,canvasHeight:0,lastTime:0};
-	canvasInit(c,data);
-	drawBackdrop(c);
-	canvasTimerFired(c,data);
+function initBars(){
 	var python = document.getElementById("skill_python");
-	python.style.width = "400px";
+	python.style.width = "500px";
 	//python.style.backgroundColor="rgb(255, 245, 67)";
 	var c = document.getElementById("skill_c");
-	c.style.width = "400px";
+	c.style.width = "500px";
 	//c.style.backgroundColor="rgb(89, 171, 227)";
 	var jva = document.getElementById("skill_java");
-	jva.style.width = "300px";
+	jva.style.width = "400px";
 	//jva.style.backgroundColor="rgb(232, 126, 4)";
 	var jscript = document.getElementById("skill_javascript");
 	jscript.style.width = "300px";
@@ -84,5 +79,48 @@ $( document ).ready(function(){
 	photoshop.style.width = "300px";
 	var photoshop = document.getElementById("skill_style");
 	photoshop.style.width = "600px";
+}
 
+function initGraphics(){
+	$('#ptfo_APT').hover(function(){
+		$( "#ptfo_APT > .portfolio_piece" ).css('backgroundImage','url(images/foo.gif)');
+		$( "#ptfo_APT > .portfolio_piece" ).css('color','white');
+		$( "#ptfo_APT > .portfolio_piece" ).css('borderColor','black');
+  	},function(){
+		$( "#ptfo_APT > .portfolio_piece" ).css('backgroundImage','');
+		$( "#ptfo_APT > .portfolio_piece" ).css('color','black');
+  	});
+  	$('#ptfo_PIZZA').hover(function(){
+		$( "#ptfo_PIZZA > .portfolio_piece" ).css('backgroundImage','url(images/pizzagif.gif)');
+		$( "#ptfo_PIZZA > .portfolio_piece" ).css('color','white');
+		$( "#ptfo_PIZZA > .portfolio_piece > .portfolio_title" ).css({ textShadow: 'black -1px -1px, black 1px 1px, black 2px 2px, black 3px 3px, black 4px 4px' })
+		$( "#ptfo_PIZZA > .portfolio_piece" ).css('borderColor','black');
+  	},function(){
+		$( "#ptfo_PIZZA > .portfolio_piece" ).css('backgroundImage','');
+		$( "#ptfo_PIZZA > .portfolio_piece" ).css('box-shadow','');
+		$( "#ptfo_PIZZA > .portfolio_piece" ).css('color','black');
+		$( "#ptfo_PIZZA > .portfolio_piece > .portfolio_title" ).css({ textShadow: ''})
+  	});
+  	$('#ptfo_SPACE').hover(function(){
+		$( "#ptfo_SPACE > .portfolio_piece" ).css('backgroundImage','url(images/spaceinvaders.gif)');
+		$( "#ptfo_SPACE > .portfolio_piece" ).css('color','white');
+		$( "#ptfo_SPACE > .portfolio_piece > .portfolio_title" ).css({ textShadow: 'black -1px -1px, black 1px 1px, black 2px 2px, black 3px 3px, black 4px 4px' })
+		$( "#ptfo_SPACE > .portfolio_piece" ).css('borderColor','black');
+  	},function(){
+		$( "#ptfo_SPACE > .portfolio_piece" ).css('backgroundImage','');
+		$( "#ptfo_SPACE > .portfolio_piece" ).css('box-shadow','');
+		$( "#ptfo_SPACE > .portfolio_piece" ).css('color','black');
+		$( "#ptfo_SPACE > .portfolio_piece > .portfolio_title" ).css({ textShadow: ''})
+  	});
+}
+
+
+$( document ).ready(function(){
+	var c = document.getElementById("main");
+	var data = {objArray:[],canvasWidth:0,canvasHeight:0,lastTime:0};
+	canvasInit(c,data);
+	drawBackdrop(c);
+	initGraphics();
+	initBars();
+	canvasTimerFired(c,data);
 });

@@ -37,7 +37,7 @@ ul{
 hr{
 	border: 0;
     height: 1px;
-    background: #e0e0e0
+    background-color: rgba(200,200,200,0.5);
 }
 .portfolio_piece{
 	border-width: 2px;
@@ -52,10 +52,10 @@ hr{
 	margin-bottom:24px;
 	margin-right: 24px;
 	box-shadow:
-	rgb(61, 61, 61) 1px 1px,
-    rgb(61, 61, 61) 2px 2px,
-    rgb(61, 61, 61) 3px 3px,
-    rgb(61, 61, 61) 4px 4px;
+	black 1px 1px,
+    black 2px 2px,
+    black 3px 3px,
+    black 4px 4px;
   
 }
 .portfolio_piece .portfolio_forward{
