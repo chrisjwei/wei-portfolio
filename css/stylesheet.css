@@ -103,7 +103,7 @@ hr{
 	font-weight:300;
 	display:inline;
 	float:left;
-
+	width:170px;
 }
 .skill .skill_title{
 	display:inline;
@@ -122,13 +122,24 @@ hr{
 	background-color: #404040;
 	position: relative;
 	top:4px;
-	width:24px;
 	height:24px;
 	box-shadow:
 	rgb(61, 61, 61) 1px 1px,
     rgb(61, 61, 61) 2px 2px,
     rgb(61, 61, 61) 3px 3px,
     rgb(61, 61, 61) 4px 4px;
+}
+
+.level_proficient{
+	width: 500px;
+}
+
+.level_familiar{
+	width: 300px;
+}
+
+.level_beyond_proficient{
+	width: 700px;
 }
 
 p{
