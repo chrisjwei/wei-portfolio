@@ -1,115 +1,3 @@
-// DATA //
-var recentWork = [
-    {
-        id:"NEWSBOT",
-        href:"",
-        forward:"HACKATHON / NLP / ML",
-        timestamp:"FALL 2015",
-        title:"Newsbot",
-        description:"News scraping for charity orgs. American Express Case Winner"
-    },
-    {
-        id:"MONEY",
-        href:"https://moneypls.herokuapp.com/",
-        forward:"HACKATHON / DJANGO / DATABASE APP / FRONT-END DESIGN",
-        timestamp:"SPRING 2015",
-        title:"MONEY PLS",
-        description:"Crowdfunding made easy! Microsoft Best Use of Azure"
-    },
-    {
-        id:"APT",
-        href:"http://predictivetechnologies.com",
-        forward:"INTERNSHIP / RELATIONAL DATABASE / SQL",
-        timestamp:"SUMMER 2015",
-        title:"Applied Predictive Technologies",
-        description:"SQL all day long + maps!"
-    },
-    {
-        id:"CHESS",
-        href:"http://chesscademy.com/",
-        forward:"ICON DESIGN / VECTOR ART",
-        timestamp:"2014-2015",
-        title:"Chesscademy Icons",
-        description:"Check out these rad icons!"
-    },
-    {
-        id:"PIZZA",
-        href:"http://pizzaplz.net46.net",
-        forward:"HACKATHON / JAVASCRIPT / PHP",
-        timestamp:"FALL 2014",
-        title:"Pizza PLZ",
-        description:"Order pizza at the click of a button (a HackCMU honorable mention)"
-    },
-    {
-        id:"NECLABS",
-        href:"http://optdemo.nec-labs.com",
-        forward:"INTERNSHIP / SPECTROSCOPY / C",
-        timestamp:"SUMMER 2014",
-        title:"NEC Labs America",
-        description:"Real-time gas sensing using mid-infrared lasers"
-    },
-    {
-        id:"SPACE",
-        href:"https://www.youtube.com/watch?v=11A2CCgzYOg",
-        forward:"COMPUTER SCIENCE / TERM PROJECT / PYTHON / PYGAME",
-        timestamp:"FALL 2013",
-        title:"Space Invaders",
-        description:"Real Time Strategy game with realistic physics and lots of laserbeams and spaceships"
-    },
-];
-
-var skills = [
-    {
-        id:'C',
-        title:'C/C++',
-        group:'tb',
-        level:'proficient'
-    },
-    {
-        id:'PYTHON',
-        title:'Python',
-        group:'tb',
-        level:'proficient'   
-    },
-    {
-        id:'C#',
-        title:'C#/.NET Framework',
-        group:'tb',
-        level:'familiar' 
-    },
-    {
-        id:'SQL',
-        title:'MySQL/SQLServer',
-        group:'tb',
-        level:'familiar'    
-    },
-    {
-        id:'HTML',
-        title:'HTML/CSS/JavaScript',
-        group:'tb',
-        level:'familiar'    
-    },
-    {
-        id:'PHOTO',
-        title:'Adobe Photoshop',
-        group:'ds',
-        level:'proficient'    
-    },
-    {
-        id:'ILLUSTRATOR',
-        title:'Adobe Illustrator',
-        group:'ds',
-        level:'proficient'    
-    },
-    {
-        id:'STYLE',
-        title:'Impeccable Style',
-        group:'ds',
-        level:'beyond_proficient'    
-    },
-]
-
-
 function drawRect(c,x0,y0,x1,y1){
     var ctx = c.getContext("2d");
     ctx.fillStyle = "#ff0000";
@@ -168,8 +56,11 @@ function fillSkills(){
     skills.forEach(function(skill){
         var skillUL = '#skill-' + skill.group + ' ul';
         var barUL = '#skill-bar-' + skill.group + ' ul';
+        var skillTitle = skillLevelToTitle(skill.level);
         $(skillUL).append('<div class="skill_title">' + skill.title + '</div><br>');
-        $(barUL).append('<div class="skill_meter level_' + skill.level + '" id="skill_'+ skill.id +'">&nbsp;</div><br>')
+        $(barUL).append('<div class="skill_meter level_' + skill.level +
+            ' tooltip" id="skill_'+ skill.id +'" title="' + skillTitle +
+            '">&nbsp;</div><br>');
     });
 }
 
@@ -185,43 +76,26 @@ function fillRecentWork(){
             '</div>' +
             '</a>';
         $("#recent_work_ul").append(template)
+        if (work.img){
+            $('#ptfo_' + work.id).hover(
+            function(){
+                $('#ptfo_' + work.id + ' > .portfolio_piece').css('backgroundImage', 'url('+ work.img +')');
+                if (work.invert){
+                    $('#ptfo_' + work.id + ' > .portfolio_piece').css('color', 'white');
+                    $('#ptfo_' + work.id + ' > .portfolio_piece').css('borderColor', 'black');
+                    $('#ptfo_' + work.id + ' > .portfolio_piece > .portfolio_title').css({ textShadow: 'black 1px 1px, black 2px 2px, black 3px 3px, black 4px 4px' });
+                }
+            },
+            function(){
+                $('#ptfo_' + work.id + ' > .portfolio_piece').css('backgroundImage', '');
+                if (work.invert){
+                    $('#ptfo_' + work.id + ' > .portfolio_piece').css('color', 'black');
+                    $('#ptfo_' + work.id + ' > .portfolio_piece > .portfolio_title').css({ textShadow: '' });
+                }
+            });
+        }
     });
 }
-
-
-function initGraphics(){
-    $('#ptfo_APT').hover(function(){
-        $( "#ptfo_APT > .portfolio_piece" ).css('backgroundImage','url(images/foo.gif)');
-        $( "#ptfo_APT > .portfolio_piece" ).css('color','white');
-        $( "#ptfo_APT > .portfolio_piece" ).css('borderColor','black');
-    },function(){
-        $( "#ptfo_APT > .portfolio_piece" ).css('backgroundImage','');
-        $( "#ptfo_APT > .portfolio_piece" ).css('color','black');
-    });
-    $('#ptfo_PIZZA').hover(function(){
-        $( "#ptfo_PIZZA > .portfolio_piece" ).css('backgroundImage','url(images/pizzagif.gif)');
-        $( "#ptfo_PIZZA > .portfolio_piece" ).css('color','white');
-        $( "#ptfo_PIZZA > .portfolio_piece > .portfolio_title" ).css({ textShadow: 'black -1px -1px, black 1px 1px, black 2px 2px, black 3px 3px, black 4px 4px' })
-        $( "#ptfo_PIZZA > .portfolio_piece" ).css('borderColor','black');
-    },function(){
-        $( "#ptfo_PIZZA > .portfolio_piece" ).css('backgroundImage','');
-        $( "#ptfo_PIZZA > .portfolio_piece" ).css('box-shadow','');
-        $( "#ptfo_PIZZA > .portfolio_piece" ).css('color','black');
-        $( "#ptfo_PIZZA > .portfolio_piece > .portfolio_title" ).css({ textShadow: ''})
-    });
-    $('#ptfo_SPACE').hover(function(){
-        $( "#ptfo_SPACE > .portfolio_piece" ).css('backgroundImage','url(images/spaceinvaders.gif)');
-        $( "#ptfo_SPACE > .portfolio_piece" ).css('color','white');
-        $( "#ptfo_SPACE > .portfolio_piece > .portfolio_title" ).css({ textShadow: 'black -1px -1px, black 1px 1px, black 2px 2px, black 3px 3px, black 4px 4px' })
-        $( "#ptfo_SPACE > .portfolio_piece" ).css('borderColor','black');
-    },function(){
-        $( "#ptfo_SPACE > .portfolio_piece" ).css('backgroundImage','');
-        $( "#ptfo_SPACE > .portfolio_piece" ).css('box-shadow','');
-        $( "#ptfo_SPACE > .portfolio_piece" ).css('color','black');
-        $( "#ptfo_SPACE > .portfolio_piece > .portfolio_title" ).css({ textShadow: ''})
-    });
-}
-
 
 $( document ).ready(function(){
     var c = document.getElementById("main");
@@ -230,4 +104,7 @@ $( document ).ready(function(){
     drawBackdrop(c);
     fillRecentWork();
     fillSkills();
+    $('.tooltip').tooltipster({
+        position:'right'
+    });
 });
