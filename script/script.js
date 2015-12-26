@@ -64,9 +64,10 @@ function fillSkills(){
     });
 }
 
-function fillRecentWork(){
+function fillPortfolio(){
     recentWork.forEach(function(work){
-        var template = '<a href="' + work.href + '" id="ptfo_' + work.id + '">' +
+        var target = (work.href == "") ? "" : 'target="_blank"';
+        var template = '<a href="' + work.href + '"' + target + ' id="ptfo_' + work.id + '">' +
             '<div class="portfolio_piece">' +
                 '<div class ="portfolio_forward">' + work.forward + '</div>' + 
                 '<div class ="portfolio_timestamp">' + work.timestamp + '</div>' +
@@ -75,7 +76,10 @@ function fillRecentWork(){
                 '<hr>' +
             '</div>' +
             '</a>';
-        $("#recent_work_ul").append(template)
+        if (work.group == "contact"){
+            template = '<a href="' + work.href + '"' + target +'><div class="portfolio_piece">' + work.title +'</div></a>';
+        }
+        $("#"+work.group+"_ul").append(template);
         if (work.img){
             $('#ptfo_' + work.id).hover(
             function(){
@@ -102,7 +106,7 @@ $( document ).ready(function(){
     var data = {objArray:[],canvasWidth:0,canvasHeight:0,lastTime:0};
     canvasInit(c,data);
     drawBackdrop(c);
-    fillRecentWork();
+    fillPortfolio();
     fillSkills();
     $('.tooltip').tooltipster({
         position:'right'
